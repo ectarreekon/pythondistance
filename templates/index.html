@@ -1,0 +1,66 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Distance Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="theme-color" content="#2196f3">
+</head>
+<body>
+    <header>
+        <h1>Location Distance Tracker</h1>
+    </header>
+    
+    <main>
+        <div class="location-selection">
+            <div class="dropdown-container">
+                <label for="saved-locations">Saved Locations:</label>
+                <select id="saved-locations">
+                    <option value="">-- Select a saved location --</option>
+                    <!-- Options will be populated by JavaScript -->
+                </select>
+            </div>
+            
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="location-search" placeholder="Search for a new location...">
+                <button id="search-btn">Search</button>
+            </div>
+        </div>
+        
+        <div class="search-results hidden" id="search-results">
+            <h3>Search Results</h3>
+            <ul id="results-list"></ul>
+        </div>
+        
+        <div class="distance-info hidden" id="distance-container">
+            <h2>Distance Information</h2>
+            <p>From: <span id="from-location"></span></p>
+            <p>To: <span id="to-location"></span></p>
+            <h2>Distance: <span id="distance"></span> km</h2>
+        </div>
+        
+        <div id="map"></div>
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script>
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/static/service-worker.js')
+                    .then(reg => console.log('Service worker registered', reg))
+                    .catch(err => console.log('Service worker registration failed', err));
+            });
+        }
+    </script>
+</body>
+</html>
