@@ -3,5 +3,3 @@ flask
 pymongo
 python-dotenv
 dotenv
-flask_pymongo
-bson
