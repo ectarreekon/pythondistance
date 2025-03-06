@@ -1,0 +1,5 @@
+# requirements.txt
+flask==2.3.3
+pymongo==4.6.1
+python-dotenv==1.0.0
+dotenv
